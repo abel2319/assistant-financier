@@ -19,20 +19,20 @@ assistant-financier/
 │ ├── app.py
 │ ├── requirements.txt
 │ ├── services/
-│ │ ├── openai_service.py
+│ │ ├── mistral_service.py
 │ │ ├── excel_generator.py
 │ │ └── parser.py
 │ └── templates/template_planification.xlsx
 │
 ├── frontend/ # Application Next.js
 │ ├── app/
-│ │ ├── page.tsx
-│ │ ├── resultat/page.tsx
-│ │ └── api/analyze/route.ts
+│ │ ├── layout.tsx
+│ │ └── page.tsx
+│ │ 
 │ ├── components/
-│ │ ├── QuestionForm.tsx
-│ │ ├── FileUploader.tsx
-│ │ └── SummaryCard.tsx
+│ │ 
+│ │ └── FileUploader.tsx
+│ │ 
 │ └── styles/globals.css
 │
 └── docker-compose.yml
