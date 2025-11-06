@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulaire JSON + Fichier</title>
+</head>
+<body>
+  <h2>Formulaire d'envoi de données et fichier</h2>
+
+  <form id="dataForm">
+    <label>Net :</label>
+    <input type="text" name="net" required><br><br>
+
+    <label>Net autre :</label>
+    <input type="text" name="net_other"><br><br>
+
+    <label>Dépenses fixes :</label>
+    <input type="text" name="depenses_fixes"><br><br>
+
+    <label>Dépenses variables :</label>
+    <input type="text" name="depenses_variables"><br><br>
+
+    <label>Objectif d’épargne :</label>
+    <input type="text" name="Objectif_épargne"><br><br>
+
+    <label>Dettes :</label>
+    <input type="text" name="Dettes"><br><br>
+
+    <label>Informations supplémentaires :</label>
+    <textarea name="informations_sup"></textarea><br><br>
+
+    <label>Fichier :</label>
+    <input type="file" name="file" required><br><br>
+
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <script>
+    document.getElementById('dataForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const fileInput = form.querySelector('input[name="file"]');
+      const file = fileInput.files[0];
+
+      // Construire l'objet JSON
+      const jsonData = {
+        net: form.net.value,
+        net_other: form.net_other.value,
+        depenses_fixes: form.depenses_fixes.value,
+        depenses_variables: form.depenses_variables.value,
+        objectif_epargne: form.Objectif_épargne.value,
+        dettes: form.Dettes.value,
+        informations_sup: form.informations_sup.value
+      };
+
+      // Préparer le FormData pour inclure JSON + fichier
+      const formData = new FormData();
+      formData.append('data', JSON.stringify(jsonData)); // JSON
+      formData.append('file', file); // Fichier
+
+      try {
+        const response = await fetch(' http://127.0.0.1:8000/analyze', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (response.ok) {
+          alert('Formulaire envoyé avec succès !');
+        } else {
+          alert('Erreur lors de l’envoi.');
+        }
+      } catch (error) {
+        alert('Erreur : ' + error.message);
+      }
+    });
+  </script>
+</body>
+</html>
