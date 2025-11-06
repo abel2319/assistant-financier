@@ -16,7 +16,7 @@ MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
 def analyze_with_mistral(description: str, client_data: str = None):
     # Charger le contenu du template Excel (en base64 pour le prompt)
 
-    template_data = extract_text_from_file(str(Path.cwd()) + "/templates/modele-bilan-comptable-boby-1.xlsx")
+    template_data = None #extract_text_from_file(str(Path.cwd()) + "/templates/modele-bilan-comptable-boby-1.xlsx")
 
     prompt_ = f"""
 Tu es un **assistant en planification financière personnelle** spécialisé dans la création de rapports clairs et exploitables sous format tableur (Excel).
